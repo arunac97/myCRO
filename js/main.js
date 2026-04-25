@@ -44,7 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileBtn.addEventListener('click', () => {
       mobileBtn.classList.toggle('active');
       mobileNav.classList.toggle('open');
-      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+
+      if (mobileNav.classList.contains('open')) {
+        // Lock body scroll but allow nav-mobile to scroll
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = `-${window.scrollY}px`;
+        mobileNav.dataset.scrollY = window.scrollY;
+      } else {
+        // Restore body scroll
+        const scrollY = mobileNav.dataset.scrollY || '0';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY));
+      }
     });
 
     // Close on link click
@@ -52,7 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => {
         mobileBtn.classList.remove('active');
         mobileNav.classList.remove('open');
+        const scrollY = mobileNav.dataset.scrollY || '0';
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY));
       });
     });
   }

@@ -225,7 +225,7 @@ button {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
-  z-index: 1000;
+  z-index: 10001;
   transition: all var(--transition-normal);
 }
 
@@ -248,7 +248,8 @@ button {
   font-size: 22px;
   font-weight: 800;
   color: var(--color-dark);
-  z-index: 1001;
+  z-index: 10000;
+  position: relative;
 }
 
 .logo-icon {
@@ -374,7 +375,8 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  z-index: 1001;
+  z-index: 10000;
+  position: relative;
 }
 
 /* Mobile Menu Toggle */
@@ -388,7 +390,8 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 10000;
+  position: relative;
   padding: 4px 0;
 }
 
@@ -421,10 +424,12 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color-white);
+  background: #ffffff;
   padding: calc(var(--header-height) + 24px) 24px 24px;
   overflow-y: auto;
-  z-index: 999;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  z-index: 10000;
   transform: translateX(100%);
   transition: transform var(--transition-slow);
 }
