@@ -312,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function highlightNav() {
     const scrollPos = window.scrollY + 120;
+    let currentSection = '';
 
     sections.forEach(section => {
       const top = section.offsetTop;
@@ -319,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = section.getAttribute('id');
 
       if (scrollPos >= top && scrollPos < top + height) {
+        currentSection = id;
         navLinks.forEach(link => {
           link.classList.remove('active');
           if (link.getAttribute('href') === '#' + id) {
@@ -327,6 +329,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+
+    // Update URL hash to match the current section on scroll
+    if (currentSection) {
+      const newHash = '#' + currentSection;
+      if (window.location.hash !== newHash) {
+        try {
+          history.replaceState(null, '', newHash);
+        } catch (e) {
+          // Silently fail in cross-origin iframes
+        }
+      }
+    }
   }
 
   window.addEventListener('scroll', highlightNav, { passive: true });
