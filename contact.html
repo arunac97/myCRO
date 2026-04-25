@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact MyCRO — Get in touch with our team for demos, support, or partnership inquiries.">
+  <title>Contact Us — MyCRO</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='16' width='100' height='100' fill='%234f46e5'/><text x='50' y='68' font-size='52' font-weight='bold' text-anchor='middle' fill='white'>M</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* Contact page specific styles */
+    .contact-hero {
+      padding-top: calc(var(--header-height) + 64px);
+      padding-bottom: 48px;
+      background: linear-gradient(180deg, var(--color-gray-100) 0%, var(--color-white) 100%);
+      text-align: center;
+    }
+
+    .contact-hero h1 {
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--color-dark);
+      margin-bottom: 16px;
+    }
+
+    .contact-hero p {
+      font-size: 18px;
+      color: var(--color-gray-600);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .contact-methods {
+      padding: 64px 0;
+    }
+
+    .contact-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .contact-method-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-xl);
+      padding: 32px 24px;
+      text-align: center;
+      transition: all var(--transition-normal);
+    }
+
+    .contact-method-card:hover {
+      border-color: var(--color-primary-light);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .contact-method-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: rgba(79,70,229,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+
+    .contact-method-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+
+    .contact-method-card p {
+      font-size: 14px;
+      color: var(--color-gray-600);
+      line-height: 1.5;
+    }
+
+    .contact-method-card a {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .contact-page-grid {
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-full-form {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-full-form h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+
+    .contact-full-form > p {
+      font-size: 15px;
+      color: var(--color-gray-600);
+      margin-bottom: 28px;
+    }
+
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .sidebar-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+    }
+
+    .sidebar-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-card p {
+      font-size: 14px;
+      color: var(--color-gray-600);
+      line-height: 1.6;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--color-gray-200);
+      padding-bottom: 16px;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .faq-question {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 4px 0;
+      user-select: none;
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 18px;
+      color: var(--color-gray-500);
+      transition: transform var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-question::after {
+      content: '−';
+    }
+
+    .faq-answer {
+      font-size: 14px;
+      color: var(--color-gray-600);
+      line-height: 1.6;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-normal), padding var(--transition-normal);
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding-top: 10px;
+    }
+
+    .office-hours {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .office-hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .office-hours-row .day {
+      color: var(--color-dark);
+      font-weight: 500;
+    }
+
+    .office-hours-row .time {
+      color: var(--color-gray-600);
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: var(--color-gray-100);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-xl);
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-placeholder-content {
+      text-align: center;
+      z-index: 1;
+    }
+
+    .map-placeholder-content .map-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .map-placeholder-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 4px;
+    }
+
+    .map-placeholder-content p {
+      font-size: 14px;
+      color: var(--color-gray-600);
+    }
+
+    /* Map grid background */
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(79,70,229,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,70,229,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .contact-methods-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-page-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .contact-hero h1 {
+        font-size: 34px;
+      }
+
+      .form-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+      .contact-methods-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-full-form {
+        padding: 24px;
+      }
+
+      .contact-hero h1 {
+        font-size: 28px;
+      }
+
+      .contact-hero p {
+        font-size: 15px;
+      }
+
+      .map-placeholder {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">M</div>
+        MyCRO
+      </a>
+
+      <nav class="nav-desktop">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#testimonials">Customers</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#" class="btn btn-ghost btn-sm">Log In</a>
+        <a href="#contact-form-section" class="btn btn-primary btn-sm">Get a Demo</a>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="nav-mobile">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#testimonials">Customers</a>
+      <a href="contact.html">Contact</a>
+      <div class="mobile-cta">
+        <a href="#" class="btn btn-secondary">Log In</a>
+        <a href="#contact-form-section" class="btn btn-primary">Get a Demo</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========== CONTACT HERO ========== -->
+  <section class="contact-hero">
+    <div class="container">
+      <span class="section-label">Contact Us</span>
+      <h1>We'd Love to Hear From You</h1>
+      <p>Whether you need a product demo, have a technical question, or want to explore a partnership — our team is ready to help.</p>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT METHODS ========== -->
+  <section class="contact-methods">
+    <div class="container">
+      <div class="contact-methods-grid">
+        <div class="contact-method-card fade-in">
+          <div class="contact-method-icon">📧</div>
+          <h3>Email</h3>
+          <p>For general inquiries<br><a href="mailto:hello@mycro.io">hello@mycro.io</a></p>
+        </div>
+        <div class="contact-method-card fade-in">
+          <div class="contact-method-icon">📞</div>
+          <h3>Phone</h3>
+          <p>Talk to our sales team<br><a href="tel:+15552345678">+1 (555) 234-5678</a></p>
+        </div>
+        <div class="contact-method-card fade-in">
+          <div class="contact-method-icon">💬</div>
+          <h3>Live Chat</h3>
+          <p>Quick answers in real-time<br><a href="#">Open live chat</a></p>
+        </div>
+        <div class="contact-method-card fade-in">
+          <div class="contact-method-icon">📋</div>
+          <h3>Help Center</h3>
+          <p>Browse our knowledge base<br><a href="#">Visit Help Center</a></p>
+        </div>
+      </div>
+
+      <!-- Contact Form + Sidebar -->
+      <div class="contact-page-grid" id="contact-form-section">
+        <div class="contact-full-form fade-in-left">
+          <h2>Send Us a Message</h2>
+          <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" placeholder="John" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Work Email *</label>
+              <input type="email" id="email" name="email" placeholder="john@company.com" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="company">Company Name</label>
+                <input type="text" id="company" name="company" placeholder="Acme Inc.">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">What can we help with? *</label>
+              <select id="subject" name="subject" required>
+                <option value="" disabled selected>Select a topic</option>
+                <option value="demo">Request a Product Demo</option>
+                <option value="pricing">Pricing & Plans</option>
+                <option value="technical">Technical Support</option>
+                <option value="integration">Integration Help</option>
+                <option value="partnership">Partnership Opportunity</option>
+                <option value="bug">Report a Bug</option>
+                <option value="feedback">Feature Request / Feedback</option>
+                <option value="other">Something Else</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="website">Website URL</label>
+              <input type="url" id="website" name="website" placeholder="https://yoursite.com">
+            </div>
+
+            <div class="form-group">
+              <label for="sessions">Monthly Website Sessions</label>
+              <select id="sessions" name="sessions">
+                <option value="" disabled selected>Select range</option>
+                <option value="under-10k">Under 10,000</option>
+                <option value="10k-50k">10,000 - 50,000</option>
+                <option value="50k-200k">50,000 - 200,000</option>
+                <option value="200k-1m">200,000 - 1,000,000</option>
+                <option value="over-1m">Over 1,000,000</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Tell us about your goals, challenges, or questions..." rows="5" required></textarea>
+            </div>
+
+            <div class="form-checkbox">
+              <input type="checkbox" id="consent" name="consent" required>
+              <label for="consent">I agree to the <a href="#">Privacy Policy</a> and consent to MyCRO processing my data for the purpose of handling my inquiry.</label>
+            </div>
+
+            <div class="form-checkbox">
+              <input type="checkbox" id="newsletter" name="newsletter">
+              <label for="newsletter">Subscribe to the MyCRO newsletter for CRO tips, product updates, and industry insights.</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+          </form>
+        </div>
+
+        <div class="contact-sidebar fade-in-right">
+          <!-- FAQ -->
+          <div class="sidebar-card">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-list">
+              <div class="faq-item">
+                <div class="faq-question">How long is the free trial?</div>
+                <div class="faq-answer">Our free trial lasts 14 days and includes access to all Professional plan features. No credit card required to start.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Do I need to install anything?</div>
+                <div class="faq-answer">Just add a single JavaScript snippet to your website. It works with any platform including WordPress, Shopify, React, and custom-built sites.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Is my data secure?</div>
+                <div class="faq-answer">Absolutely. We're GDPR and CCPA compliant, with SOC 2 Type II certification. All data is encrypted at rest and in transit.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Can I cancel anytime?</div>
+                <div class="faq-answer">Yes. There are no long-term contracts. Cancel or downgrade anytime from your account settings. We also offer prorated refunds.</div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question">Do you offer custom enterprise plans?</div>
+                <div class="faq-answer">Yes! Enterprise plans include custom session limits, dedicated CSM, SSO, SLA, and priority support. Contact our sales team to discuss your needs.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Office Hours -->
+          <div class="sidebar-card">
+            <h3>🕐 Office Hours</h3>
+            <div class="office-hours">
+              <div class="office-hours-row">
+                <span class="day">Monday - Friday</span>
+                <span class="time">9:00 AM — 6:00 PM ET</span>
+              </div>
+              <div class="office-hours-row">
+                <span class="day">Saturday</span>
+                <span class="time">10:00 AM — 2:00 PM ET</span>
+              </div>
+              <div class="office-hours-row">
+                <span class="day">Sunday</span>
+                <span class="time">Closed</span>
+              </div>
+            </div>
+            <p style="margin-top: 16px; font-size: 13px; color: var(--color-gray-500);">
+              Emergency support is available 24/7 for Enterprise customers.
+            </p>
+          </div>
+
+          <!-- CTA Card -->
+          <div class="sidebar-card" style="background: linear-gradient(135deg, var(--color-primary), #6366f1); border-color: transparent; color: white;">
+            <h3 style="color: white;">🚀 Ready for a demo?</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+              See MyCRO in action with a personalized walkthrough from our product team.
+            </p>
+            <a href="#contact-form-section" class="btn" style="background: white; color: var(--color-primary); font-weight: 700; width: 100%;">
+              Book a Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Placeholder -->
+      <div class="map-placeholder fade-in">
+        <div class="map-placeholder-content">
+          <div class="map-icon">📍</div>
+          <h3>MyCRO Headquarters</h3>
+          <p>123 Optimization Way, Suite 400 · San Francisco, CA 94105</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-icon">M</div>
+            MyCRO
+          </a>
+          <p>The all-in-one conversion rate optimization platform. Understand users, test ideas, and grow — faster.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="index.html#products">Heatmaps</a></li>
+            <li><a href="index.html#products">Session Recordings</a></li>
+            <li><a href="index.html#products">A/B Testing</a></li>
+            <li><a href="index.html#products">Funnel Analytics</a></li>
+            <li><a href="index.html#products">Surveys</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Webinars</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Press Kit</a></li>
+            <li><a href="#">Partners</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">GDPR</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MyCRO, Inc. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cookies</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <div class="toast-icon success">✓</div>
+    <div class="toast-content">
+      <strong>Success</strong>
+      <span>Action completed.</span>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const wasOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        // Toggle current
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>
