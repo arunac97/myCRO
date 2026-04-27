@@ -143,7 +143,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Scroll Animations (Intersection Observer) ----------
   const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
 
-  if ('IntersectionObserver' in window) {
+  // Detect headless browsers, bots, or prerenderers where IntersectionObserver may not fire
+  const isHeadless = (
+    navigator.webdriver ||
+    /HeadlessChrome|Puppeteer|Playwright|PhantomJS|Prerender|Googlebot|bingbot|Slurp/i.test(navigator.userAgent) ||
+    !window.requestAnimationFrame
+  );
+
+  if (isHeadless) {
+    // Skip animations entirely — show everything immediately
+    animatedElements.forEach(el => el.classList.add('visible'));
+  } else if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
