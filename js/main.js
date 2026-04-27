@@ -140,38 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ---------- Scroll Animations (Intersection Observer) ----------
-  const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
-
-  // Detect headless browsers, bots, or prerenderers where IntersectionObserver may not fire
-  const isHeadless = (
-    navigator.webdriver ||
-    /HeadlessChrome|Puppeteer|Playwright|PhantomJS|Prerender|Googlebot|bingbot|Slurp/i.test(navigator.userAgent) ||
-    !window.requestAnimationFrame
-  );
-
-  if (isHeadless) {
-    // Skip animations entirely — show everything immediately
-    animatedElements.forEach(el => el.classList.add('visible'));
-  } else if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
-    animatedElements.forEach(el => observer.observe(el));
-  } else {
-    // Fallback - show everything
-    animatedElements.forEach(el => el.classList.add('visible'));
-  }
-
   // ---------- Cookie Banner ----------
   const cookieBanner = document.querySelector('.cookie-banner');
   const cookieAccept = document.getElementById('cookie-accept');
